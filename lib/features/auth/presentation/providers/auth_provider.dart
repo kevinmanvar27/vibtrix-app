@@ -109,27 +109,34 @@ class AuthNotifier extends StateNotifier<AuthState> {
     );
   }
 
-  /// Login with email and password
+  /// Login with username/email and password
   Future<bool> login({
+    String? username,  // API expects username
     String? email,
     String? phone,
     required String password,
     String? deviceId,
     String? fcmToken,
   }) async {
+    debugPrint('[AuthNotifier] login() called with username: $username');
     state = state.copyWith(isLoading: true, clearError: true);
 
     final request = LoginRequest(
+      username: username,
       email: email,
       phone: phone,
       password: password,
       deviceId: deviceId,
       fcmToken: fcmToken,
     );
+    
+    debugPrint('[AuthNotifier] Calling repository.login()...');
     final result = await _repository.login(request);
+    debugPrint('[AuthNotifier] Repository returned result');
 
     return result.fold(
       (failure) {
+        debugPrint('[AuthNotifier] Login FAILED: ${failure.runtimeType} - ${_getErrorMessage(failure)}');
         state = state.copyWith(
           isLoading: false,
           errorMessage: _getErrorMessage(failure),
@@ -137,6 +144,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
         return false;
       },
       (response) {
+        debugPrint('[AuthNotifier] Login SUCCESS! User: ${response.user.username}');
         state = AuthState.authenticated(response.user);
         return true;
       },

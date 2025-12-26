@@ -7,6 +7,7 @@ part of 'auth_models.dart';
 // **************************************************************************
 
 LoginRequest _$LoginRequestFromJson(Map<String, dynamic> json) => LoginRequest(
+  username: json['username'] as String?,
   email: json['email'] as String?,
   phone: json['phone'] as String?,
   password: json['password'] as String,
@@ -17,6 +18,7 @@ LoginRequest _$LoginRequestFromJson(Map<String, dynamic> json) => LoginRequest(
 
 Map<String, dynamic> _$LoginRequestToJson(LoginRequest instance) =>
     <String, dynamic>{
+      'username': instance.username,
       'email': instance.email,
       'phone': instance.phone,
       'password': instance.password,
@@ -216,11 +218,27 @@ Map<String, dynamic> _$AppleMobileLoginRequestToJson(
   'lastName': instance.lastName,
 };
 
+AuthUser _$AuthUserFromJson(Map<String, dynamic> json) => AuthUser(
+  id: json['id'] as String,
+  username: json['username'] as String,
+  name: json['displayName'] as String?,
+  profilePicture: json['avatarUrl'] as String?,
+  role: json['role'] as String?,
+);
+
+Map<String, dynamic> _$AuthUserToJson(AuthUser instance) => <String, dynamic>{
+  'id': instance.id,
+  'username': instance.username,
+  'displayName': instance.name,
+  'avatarUrl': instance.profilePicture,
+  'role': instance.role,
+};
+
 AuthResponse _$AuthResponseFromJson(Map<String, dynamic> json) => AuthResponse(
   accessToken: json['accessToken'] as String,
   refreshToken: json['refreshToken'] as String?,
   expiresIn: (json['expiresIn'] as num?)?.toInt(),
-  user: UserModel.fromJson(json['user'] as Map<String, dynamic>),
+  user: _userFromJson(json['user'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$AuthResponseToJson(AuthResponse instance) =>
@@ -235,16 +253,16 @@ MobileAuthUser _$MobileAuthUserFromJson(Map<String, dynamic> json) =>
     MobileAuthUser(
       id: json['id'] as String,
       username: json['username'] as String,
-      displayName: json['displayName'] as String?,
-      avatarUrl: json['avatarUrl'] as String?,
+      name: json['displayName'] as String?,
+      profilePicture: json['avatarUrl'] as String?,
     );
 
 Map<String, dynamic> _$MobileAuthUserToJson(MobileAuthUser instance) =>
     <String, dynamic>{
       'id': instance.id,
       'username': instance.username,
-      'displayName': instance.displayName,
-      'avatarUrl': instance.avatarUrl,
+      'displayName': instance.name,
+      'avatarUrl': instance.profilePicture,
     };
 
 MobileAuthResponse _$MobileAuthResponseFromJson(Map<String, dynamic> json) =>

@@ -112,13 +112,15 @@ class _ExploreApiService implements ExploreApiService {
     try {
       _value = ApiResponse<List<SimpleUserModel>>.fromJson(
         _result.data!,
-        (json) => json is List<dynamic>
-            ? json
-                  .map<SimpleUserModel>(
-                    (i) => SimpleUserModel.fromJson(i as Map<String, dynamic>),
-                  )
-                  .toList()
-            : List.empty(),
+        (json) =>
+            json is List<dynamic>
+                ? json
+                    .map<SimpleUserModel>(
+                      (i) =>
+                          SimpleUserModel.fromJson(i as Map<String, dynamic>),
+                    )
+                    .toList()
+                : List.empty(),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -150,13 +152,15 @@ class _ExploreApiService implements ExploreApiService {
     try {
       _value = ApiResponse<List<CompetitionModel>>.fromJson(
         _result.data!,
-        (json) => json is List<dynamic>
-            ? json
-                  .map<CompetitionModel>(
-                    (i) => CompetitionModel.fromJson(i as Map<String, dynamic>),
-                  )
-                  .toList()
-            : List.empty(),
+        (json) =>
+            json is List<dynamic>
+                ? json
+                    .map<CompetitionModel>(
+                      (i) =>
+                          CompetitionModel.fromJson(i as Map<String, dynamic>),
+                    )
+                    .toList()
+                : List.empty(),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -193,13 +197,14 @@ class _ExploreApiService implements ExploreApiService {
     try {
       _value = ApiResponse<List<PostModel>>.fromJson(
         _result.data!,
-        (json) => json is List<dynamic>
-            ? json
-                  .map<PostModel>(
-                    (i) => PostModel.fromJson(i as Map<String, dynamic>),
-                  )
-                  .toList()
-            : List.empty(),
+        (json) =>
+            json is List<dynamic>
+                ? json
+                    .map<PostModel>(
+                      (i) => PostModel.fromJson(i as Map<String, dynamic>),
+                    )
+                    .toList()
+                : List.empty(),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -231,13 +236,14 @@ class _ExploreApiService implements ExploreApiService {
     try {
       _value = ApiResponse<List<HashtagModel>>.fromJson(
         _result.data!,
-        (json) => json is List<dynamic>
-            ? json
-                  .map<HashtagModel>(
-                    (i) => HashtagModel.fromJson(i as Map<String, dynamic>),
-                  )
-                  .toList()
-            : List.empty(),
+        (json) =>
+            json is List<dynamic>
+                ? json
+                    .map<HashtagModel>(
+                      (i) => HashtagModel.fromJson(i as Map<String, dynamic>),
+                    )
+                    .toList()
+                : List.empty(),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -269,13 +275,15 @@ class _ExploreApiService implements ExploreApiService {
     try {
       _value = ApiResponse<List<SimpleUserModel>>.fromJson(
         _result.data!,
-        (json) => json is List<dynamic>
-            ? json
-                  .map<SimpleUserModel>(
-                    (i) => SimpleUserModel.fromJson(i as Map<String, dynamic>),
-                  )
-                  .toList()
-            : List.empty(),
+        (json) =>
+            json is List<dynamic>
+                ? json
+                    .map<SimpleUserModel>(
+                      (i) =>
+                          SimpleUserModel.fromJson(i as Map<String, dynamic>),
+                    )
+                    .toList()
+                : List.empty(),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -305,15 +313,16 @@ class _ExploreApiService implements ExploreApiService {
     try {
       _value = ApiResponse<List<ExploreCategoryModel>>.fromJson(
         _result.data!,
-        (json) => json is List<dynamic>
-            ? json
-                  .map<ExploreCategoryModel>(
-                    (i) => ExploreCategoryModel.fromJson(
-                      i as Map<String, dynamic>,
-                    ),
-                  )
-                  .toList()
-            : List.empty(),
+        (json) =>
+            json is List<dynamic>
+                ? json
+                    .map<ExploreCategoryModel>(
+                      (i) => ExploreCategoryModel.fromJson(
+                        i as Map<String, dynamic>,
+                      ),
+                    )
+                    .toList()
+                : List.empty(),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -497,15 +506,16 @@ class _ExploreApiService implements ExploreApiService {
     try {
       _value = ApiResponse<List<FeaturedContentModel>>.fromJson(
         _result.data!,
-        (json) => json is List<dynamic>
-            ? json
-                  .map<FeaturedContentModel>(
-                    (i) => FeaturedContentModel.fromJson(
-                      i as Map<String, dynamic>,
-                    ),
-                  )
-                  .toList()
-            : List.empty(),
+        (json) =>
+            json is List<dynamic>
+                ? json
+                    .map<FeaturedContentModel>(
+                      (i) => FeaturedContentModel.fromJson(
+                        i as Map<String, dynamic>,
+                      ),
+                    )
+                    .toList()
+                : List.empty(),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -537,13 +547,15 @@ class _ExploreApiService implements ExploreApiService {
     try {
       _value = ApiResponse<List<SimpleUserModel>>.fromJson(
         _result.data!,
-        (json) => json is List<dynamic>
-            ? json
-                  .map<SimpleUserModel>(
-                    (i) => SimpleUserModel.fromJson(i as Map<String, dynamic>),
-                  )
-                  .toList()
-            : List.empty(),
+        (json) =>
+            json is List<dynamic>
+                ? json
+                    .map<SimpleUserModel>(
+                      (i) =>
+                          SimpleUserModel.fromJson(i as Map<String, dynamic>),
+                    )
+                    .toList()
+                : List.empty(),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -575,13 +587,15 @@ class _ExploreApiService implements ExploreApiService {
     try {
       _value = ApiResponse<List<SimpleUserModel>>.fromJson(
         _result.data!,
-        (json) => json is List<dynamic>
-            ? json
-                  .map<SimpleUserModel>(
-                    (i) => SimpleUserModel.fromJson(i as Map<String, dynamic>),
-                  )
-                  .toList()
-            : List.empty(),
+        (json) =>
+            json is List<dynamic>
+                ? json
+                    .map<SimpleUserModel>(
+                      (i) =>
+                          SimpleUserModel.fromJson(i as Map<String, dynamic>),
+                    )
+                    .toList()
+                : List.empty(),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);

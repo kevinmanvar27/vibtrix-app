@@ -11,18 +11,21 @@ ChatModel _$ChatModelFromJson(Map<String, dynamic> json) => ChatModel(
   type: $enumDecode(_$ChatTypeEnumMap, json['type']),
   name: json['name'] as String?,
   imageUrl: json['imageUrl'] as String?,
-  participants: (json['participants'] as List<dynamic>)
-      .map((e) => ChatParticipantModel.fromJson(e as Map<String, dynamic>))
-      .toList(),
-  lastMessage: json['lastMessage'] == null
-      ? null
-      : MessageModel.fromJson(json['lastMessage'] as Map<String, dynamic>),
+  participants:
+      (json['participants'] as List<dynamic>)
+          .map((e) => ChatParticipantModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+  lastMessage:
+      json['lastMessage'] == null
+          ? null
+          : MessageModel.fromJson(json['lastMessage'] as Map<String, dynamic>),
   unreadCount: (json['unreadCount'] as num?)?.toInt() ?? 0,
   isMuted: json['isMuted'] as bool? ?? false,
   createdAt: DateTime.parse(json['createdAt'] as String),
-  updatedAt: json['updatedAt'] == null
-      ? null
-      : DateTime.parse(json['updatedAt'] as String),
+  updatedAt:
+      json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
 );
 
 Map<String, dynamic> _$ChatModelToJson(ChatModel instance) => <String, dynamic>{
@@ -46,16 +49,18 @@ ChatParticipantModel _$ChatParticipantModelFromJson(
   id: json['id'] as String,
   chatId: json['chatId'] as String,
   userId: json['userId'] as String,
-  user: json['user'] == null
-      ? null
-      : SimpleUserModel.fromJson(json['user'] as Map<String, dynamic>),
+  user:
+      json['user'] == null
+          ? null
+          : SimpleUserModel.fromJson(json['user'] as Map<String, dynamic>),
   role:
       $enumDecodeNullable(_$ParticipantRoleEnumMap, json['role']) ??
       ParticipantRole.member,
   joinedAt: DateTime.parse(json['joinedAt'] as String),
-  lastReadAt: json['lastReadAt'] == null
-      ? null
-      : DateTime.parse(json['lastReadAt'] as String),
+  lastReadAt:
+      json['lastReadAt'] == null
+          ? null
+          : DateTime.parse(json['lastReadAt'] as String),
 );
 
 Map<String, dynamic> _$ChatParticipantModelToJson(
@@ -79,28 +84,31 @@ MessageModel _$MessageModelFromJson(Map<String, dynamic> json) => MessageModel(
   id: json['id'] as String,
   chatId: json['chatId'] as String,
   senderId: json['senderId'] as String,
-  sender: json['sender'] == null
-      ? null
-      : SimpleUserModel.fromJson(json['sender'] as Map<String, dynamic>),
+  sender:
+      json['sender'] == null
+          ? null
+          : SimpleUserModel.fromJson(json['sender'] as Map<String, dynamic>),
   type: $enumDecode(_$MessageTypeEnumMap, json['type']),
   content: json['content'] as String?,
-  media: json['media'] == null
-      ? null
-      : MessageMediaModel.fromJson(json['media'] as Map<String, dynamic>),
+  media:
+      json['media'] == null
+          ? null
+          : MessageMediaModel.fromJson(json['media'] as Map<String, dynamic>),
   replyToId: json['replyToId'] as String?,
-  replyTo: json['replyTo'] == null
-      ? null
-      : MessageModel.fromJson(json['replyTo'] as Map<String, dynamic>),
+  replyTo:
+      json['replyTo'] == null
+          ? null
+          : MessageModel.fromJson(json['replyTo'] as Map<String, dynamic>),
   status:
       $enumDecodeNullable(_$MessageStatusEnumMap, json['status']) ??
       MessageStatus.sent,
   createdAt: DateTime.parse(json['createdAt'] as String),
-  readAt: json['readAt'] == null
-      ? null
-      : DateTime.parse(json['readAt'] as String),
-  deletedAt: json['deletedAt'] == null
-      ? null
-      : DateTime.parse(json['deletedAt'] as String),
+  readAt:
+      json['readAt'] == null ? null : DateTime.parse(json['readAt'] as String),
+  deletedAt:
+      json['deletedAt'] == null
+          ? null
+          : DateTime.parse(json['deletedAt'] as String),
 );
 
 Map<String, dynamic> _$MessageModelToJson(MessageModel instance) =>
@@ -165,9 +173,10 @@ Map<String, dynamic> _$MessageMediaModelToJson(MessageMediaModel instance) =>
 
 CreateChatRequest _$CreateChatRequestFromJson(Map<String, dynamic> json) =>
     CreateChatRequest(
-      participantIds: (json['participantIds'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
+      participantIds:
+          (json['participantIds'] as List<dynamic>)
+              .map((e) => e as String)
+              .toList(),
       name: json['name'] as String?,
       imageUrl: json['imageUrl'] as String?,
     );
@@ -206,9 +215,10 @@ Map<String, dynamic> _$SendMessageRequestToJson(SendMessageRequest instance) =>
 CreateGroupChatRequest _$CreateGroupChatRequestFromJson(
   Map<String, dynamic> json,
 ) => CreateGroupChatRequest(
-  participantIds: (json['participantIds'] as List<dynamic>)
-      .map((e) => e as String)
-      .toList(),
+  participantIds:
+      (json['participantIds'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
   name: json['name'] as String,
   imageUrl: json['imageUrl'] as String?,
 );
@@ -241,9 +251,10 @@ Map<String, dynamic> _$MuteChatRequestToJson(MuteChatRequest instance) =>
 MutedStatusResponse _$MutedStatusResponseFromJson(Map<String, dynamic> json) =>
     MutedStatusResponse(
       isMuted: json['isMuted'] as bool,
-      mutedUntil: json['mutedUntil'] == null
-          ? null
-          : DateTime.parse(json['mutedUntil'] as String),
+      mutedUntil:
+          json['mutedUntil'] == null
+              ? null
+              : DateTime.parse(json['mutedUntil'] as String),
     );
 
 Map<String, dynamic> _$MutedStatusResponseToJson(

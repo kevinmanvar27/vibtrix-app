@@ -13,9 +13,10 @@ ApiResponse<T> _$ApiResponseFromJson<T>(
   success: json['success'] as bool,
   message: json['message'] as String?,
   data: _$nullableGenericFromJson(json['data'], fromJsonT),
-  error: json['error'] == null
-      ? null
-      : ApiError.fromJson(json['error'] as Map<String, dynamic>),
+  error:
+      json['error'] == null
+          ? null
+          : ApiError.fromJson(json['error'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$ApiResponseToJson<T>(

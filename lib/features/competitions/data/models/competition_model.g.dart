@@ -22,24 +22,33 @@ CompetitionModel _$CompetitionModelFromJson(
   currency: json['currency'] as String?,
   startDate: DateTime.parse(json['startDate'] as String),
   endDate: DateTime.parse(json['endDate'] as String),
-  registrationDeadline: json['registrationDeadline'] == null
-      ? null
-      : DateTime.parse(json['registrationDeadline'] as String),
+  registrationDeadline:
+      json['registrationDeadline'] == null
+          ? null
+          : DateTime.parse(json['registrationDeadline'] as String),
   entryFee: (json['entryFee'] as num?)?.toInt() ?? 0,
   isParticipating: json['isParticipating'] as bool? ?? false,
   isFeatured: json['isFeatured'] as bool? ?? false,
-  rounds: (json['rounds'] as List<dynamic>?)
-      ?.map((e) => CompetitionRoundModel.fromJson(e as Map<String, dynamic>))
-      .toList(),
-  prizes: (json['prizes'] as List<dynamic>?)
-      ?.map((e) => PrizeModel.fromJson(e as Map<String, dynamic>))
-      .toList(),
-  rules: json['rules'] == null
-      ? null
-      : CompetitionRulesModel.fromJson(json['rules'] as Map<String, dynamic>),
-  creator: json['creator'] == null
-      ? null
-      : SimpleUserModel.fromJson(json['creator'] as Map<String, dynamic>),
+  rounds:
+      (json['rounds'] as List<dynamic>?)
+          ?.map(
+            (e) => CompetitionRoundModel.fromJson(e as Map<String, dynamic>),
+          )
+          .toList(),
+  prizes:
+      (json['prizes'] as List<dynamic>?)
+          ?.map((e) => PrizeModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+  rules:
+      json['rules'] == null
+          ? null
+          : CompetitionRulesModel.fromJson(
+            json['rules'] as Map<String, dynamic>,
+          ),
+  creator:
+      json['creator'] == null
+          ? null
+          : SimpleUserModel.fromJson(json['creator'] as Map<String, dynamic>),
   createdAt: DateTime.parse(json['createdAt'] as String),
 );
 
@@ -140,13 +149,13 @@ CompetitionRulesModel _$CompetitionRulesModelFromJson(
 ) => CompetitionRulesModel(
   minVideoDuration: (json['minVideoDuration'] as num?)?.toInt(),
   maxVideoDuration: (json['maxVideoDuration'] as num?)?.toInt(),
-  allowedFormats: (json['allowedFormats'] as List<dynamic>?)
-      ?.map((e) => e as String)
-      .toList(),
+  allowedFormats:
+      (json['allowedFormats'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
   theme: json['theme'] as String?,
-  guidelines: (json['guidelines'] as List<dynamic>?)
-      ?.map((e) => e as String)
-      .toList(),
+  guidelines:
+      (json['guidelines'] as List<dynamic>?)?.map((e) => e as String).toList(),
 );
 
 Map<String, dynamic> _$CompetitionRulesModelToJson(
@@ -164,9 +173,10 @@ ParticipantModel _$ParticipantModelFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       competitionId: json['competitionId'] as String,
       userId: json['userId'] as String,
-      user: json['user'] == null
-          ? null
-          : SimpleUserModel.fromJson(json['user'] as Map<String, dynamic>),
+      user:
+          json['user'] == null
+              ? null
+              : SimpleUserModel.fromJson(json['user'] as Map<String, dynamic>),
       postId: json['postId'] as String?,
       rank: (json['rank'] as num?)?.toInt() ?? 0,
       votes: (json['votes'] as num?)?.toInt() ?? 0,
@@ -202,9 +212,10 @@ LeaderboardEntryModel _$LeaderboardEntryModelFromJson(
 ) => LeaderboardEntryModel(
   rank: (json['rank'] as num).toInt(),
   odUserId: json['odUserId'] as String,
-  user: json['user'] == null
-      ? null
-      : SimpleUserModel.fromJson(json['user'] as Map<String, dynamic>),
+  user:
+      json['user'] == null
+          ? null
+          : SimpleUserModel.fromJson(json['user'] as Map<String, dynamic>),
   votes: (json['votes'] as num?)?.toInt() ?? 0,
   score: (json['score'] as num?)?.toInt() ?? 0,
   postId: json['postId'] as String?,
@@ -236,16 +247,21 @@ CreateCompetitionRequest _$CreateCompetitionRequestFromJson(
   currency: json['currency'] as String?,
   startDate: DateTime.parse(json['startDate'] as String),
   endDate: DateTime.parse(json['endDate'] as String),
-  registrationDeadline: json['registrationDeadline'] == null
-      ? null
-      : DateTime.parse(json['registrationDeadline'] as String),
+  registrationDeadline:
+      json['registrationDeadline'] == null
+          ? null
+          : DateTime.parse(json['registrationDeadline'] as String),
   entryFee: (json['entryFee'] as num?)?.toInt(),
-  rules: json['rules'] == null
-      ? null
-      : CompetitionRulesModel.fromJson(json['rules'] as Map<String, dynamic>),
-  prizes: (json['prizes'] as List<dynamic>?)
-      ?.map((e) => PrizeModel.fromJson(e as Map<String, dynamic>))
-      .toList(),
+  rules:
+      json['rules'] == null
+          ? null
+          : CompetitionRulesModel.fromJson(
+            json['rules'] as Map<String, dynamic>,
+          ),
+  prizes:
+      (json['prizes'] as List<dynamic>?)
+          ?.map((e) => PrizeModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
 );
 
 Map<String, dynamic> _$CreateCompetitionRequestToJson(
@@ -277,22 +293,29 @@ UpdateCompetitionRequest _$UpdateCompetitionRequestFromJson(
   maxParticipants: (json['maxParticipants'] as num?)?.toInt(),
   prizePool: (json['prizePool'] as num?)?.toInt(),
   currency: json['currency'] as String?,
-  startDate: json['startDate'] == null
-      ? null
-      : DateTime.parse(json['startDate'] as String),
-  endDate: json['endDate'] == null
-      ? null
-      : DateTime.parse(json['endDate'] as String),
-  registrationDeadline: json['registrationDeadline'] == null
-      ? null
-      : DateTime.parse(json['registrationDeadline'] as String),
+  startDate:
+      json['startDate'] == null
+          ? null
+          : DateTime.parse(json['startDate'] as String),
+  endDate:
+      json['endDate'] == null
+          ? null
+          : DateTime.parse(json['endDate'] as String),
+  registrationDeadline:
+      json['registrationDeadline'] == null
+          ? null
+          : DateTime.parse(json['registrationDeadline'] as String),
   entryFee: (json['entryFee'] as num?)?.toInt(),
-  rules: json['rules'] == null
-      ? null
-      : CompetitionRulesModel.fromJson(json['rules'] as Map<String, dynamic>),
-  prizes: (json['prizes'] as List<dynamic>?)
-      ?.map((e) => PrizeModel.fromJson(e as Map<String, dynamic>))
-      .toList(),
+  rules:
+      json['rules'] == null
+          ? null
+          : CompetitionRulesModel.fromJson(
+            json['rules'] as Map<String, dynamic>,
+          ),
+  prizes:
+      (json['prizes'] as List<dynamic>?)
+          ?.map((e) => PrizeModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
 );
 
 Map<String, dynamic> _$UpdateCompetitionRequestToJson(

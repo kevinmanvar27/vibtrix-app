@@ -20,36 +20,23 @@ Future<void> main() async {
   // Ensure Flutter bindings are initialized
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Run initialization in a zone to catch errors
-  await runZonedGuarded(
-    () async {
-      // Initialize services in parallel where possible
-      await Future.wait([
-        _initializeFirebase(),
-        _initializeStorage(),
-      ]);
-      
-      // Configure system UI
-      _configureSystemUI();
-      
-      // Set up error handling
-      _setupErrorHandling();
-      
-      // Run the app with Riverpod
-      runApp(
-        const ProviderScope(
-          child: VidiBattleApp(),
-        ),
-      );
-    },
-    (error, stackTrace) {
-      // Global error handler for uncaught errors
-      if (kDebugMode) {
-        print('Uncaught error: $error');
-        print('Stack trace: $stackTrace');
-      }
-      // In production, you might want to log this to a crash reporting service
-    },
+  // Initialize services
+  await Future.wait([
+    _initializeFirebase(),
+    _initializeStorage(),
+  ]);
+  
+  // Configure system UI
+  _configureSystemUI();
+  
+  // Set up error handling
+  _setupErrorHandling();
+  
+  // Run the app with Riverpod
+  runApp(
+    const ProviderScope(
+      child: VidiBattleApp(),
+    ),
   );
 }
 
@@ -122,13 +109,6 @@ void _setupErrorHandling() {
     if (kDebugMode) {
       // In debug mode, print to console
       FlutterError.dumpErrorToConsole(details);
-    } else {
-      // In release mode, log to crash reporting service
-      // TODO: Integrate with Firebase Crashlytics or similar
-      Zone.current.handleUncaughtError(
-        details.exception,
-        details.stack ?? StackTrace.current,
-      );
     }
   };
   

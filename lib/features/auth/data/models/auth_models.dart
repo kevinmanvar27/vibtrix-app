@@ -7,6 +7,7 @@ part 'auth_models.g.dart';
 
 @JsonSerializable()
 class LoginRequest {
+  final String? username;  // API expects username, not email
   final String? email;
   final String? phone;
   final String password;
@@ -15,6 +16,7 @@ class LoginRequest {
   final String? fcmToken;
 
   const LoginRequest({
+    this.username,
     this.email,
     this.phone,
     required this.password,
@@ -272,11 +274,51 @@ class AppleMobileLoginRequest {
 
 // ============ RESPONSE MODELS ============
 
+/// User data returned from login/auth endpoints
+/// This matches the simplified user object returned by the backend
+@JsonSerializable()
+class AuthUser {
+  final String id;
+  final String username;
+  @JsonKey(name: 'displayName')
+  final String? name;
+  @JsonKey(name: 'avatarUrl')
+  final String? profilePicture;
+  final String? role;
+
+  const AuthUser({
+    required this.id,
+    required this.username,
+    this.name,
+    this.profilePicture,
+    this.role,
+  });
+
+  factory AuthUser.fromJson(Map<String, dynamic> json) =>
+      _$AuthUserFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AuthUserToJson(this);
+
+  /// Convert to full UserModel for app state
+  UserModel toUserModel() {
+    return UserModel(
+      id: id,
+      username: username,
+      name: name,
+      profilePicture: profilePicture,
+      createdAt: DateTime.now(), // Backend doesn't return this for auth endpoints
+    );
+  }
+}
+
+/// Response from login/signup endpoints
+/// Matches backend response: { accessToken, refreshToken, user }
 @JsonSerializable()
 class AuthResponse {
   final String accessToken;
   final String? refreshToken;
   final int? expiresIn;
+  @JsonKey(fromJson: _userFromJson)
   final UserModel user;
 
   const AuthResponse({
@@ -292,20 +334,53 @@ class AuthResponse {
   Map<String, dynamic> toJson() => _$AuthResponseToJson(this);
 }
 
+/// Custom JSON converter for user field that handles both formats
+UserModel _userFromJson(Map<String, dynamic> json) {
+  // The backend returns displayName/avatarUrl, but UserModel expects name/profilePicture
+  // Handle both formats for compatibility
+  return UserModel(
+    id: json['id'] as String,
+    username: json['username'] as String,
+    // Handle both 'name' and 'displayName' fields
+    name: json['name'] as String? ?? json['displayName'] as String?,
+    // Handle both 'profilePicture' and 'avatarUrl' fields
+    profilePicture: json['profilePicture'] as String? ?? json['avatarUrl'] as String?,
+    email: json['email'] as String?,
+    phone: json['phone'] as String?,
+    bio: json['bio'] as String?,
+    coverPicture: json['coverPicture'] as String?,
+    isVerified: json['isVerified'] as bool? ?? false,
+    isPrivate: json['isPrivate'] as bool? ?? false,
+    followersCount: (json['followersCount'] as num?)?.toInt() ?? 0,
+    followingCount: (json['followingCount'] as num?)?.toInt() ?? 0,
+    postsCount: (json['postsCount'] as num?)?.toInt() ?? 0,
+    totalLikes: (json['totalLikes'] as num?)?.toInt() ?? 0,
+    // createdAt might not be returned by auth endpoints, use current time as fallback
+    createdAt: json['createdAt'] != null 
+        ? DateTime.parse(json['createdAt'] as String) 
+        : DateTime.now(),
+    updatedAt: json['updatedAt'] != null 
+        ? DateTime.parse(json['updatedAt'] as String) 
+        : null,
+  );
+}
+
 /// User model for mobile auth response
 /// Matches the simplified user object returned by /api/auth/google/mobile
 @JsonSerializable()
 class MobileAuthUser {
   final String id;
   final String username;
-  final String? displayName;
-  final String? avatarUrl;
+  @JsonKey(name: 'displayName')
+  final String? name;
+  @JsonKey(name: 'avatarUrl')
+  final String? profilePicture;
 
   const MobileAuthUser({
     required this.id,
     required this.username,
-    this.displayName,
-    this.avatarUrl,
+    this.name,
+    this.profilePicture,
   });
 
   factory MobileAuthUser.fromJson(Map<String, dynamic> json) =>
@@ -318,8 +393,8 @@ class MobileAuthUser {
     return UserModel(
       id: id,
       username: username,
-      name: displayName,
-      profilePicture: avatarUrl,
+      name: name,
+      profilePicture: profilePicture,
       createdAt: DateTime.now(), // Backend doesn't return this for mobile auth
     );
   }

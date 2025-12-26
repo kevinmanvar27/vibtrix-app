@@ -47,15 +47,18 @@ Map<String, dynamic> _$SaveRecentSearchRequestToJson(
 SearchSuggestionsModel _$SearchSuggestionsModelFromJson(
   Map<String, dynamic> json,
 ) => SearchSuggestionsModel(
-  textSuggestions: (json['textSuggestions'] as List<dynamic>)
-      .map((e) => e as String)
-      .toList(),
-  userSuggestions: (json['userSuggestions'] as List<dynamic>)
-      .map((e) => SimpleUserModel.fromJson(e as Map<String, dynamic>))
-      .toList(),
-  hashtagSuggestions: (json['hashtagSuggestions'] as List<dynamic>)
-      .map((e) => HashtagModel.fromJson(e as Map<String, dynamic>))
-      .toList(),
+  textSuggestions:
+      (json['textSuggestions'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+  userSuggestions:
+      (json['userSuggestions'] as List<dynamic>)
+          .map((e) => SimpleUserModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+  hashtagSuggestions:
+      (json['hashtagSuggestions'] as List<dynamic>)
+          .map((e) => HashtagModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
 );
 
 Map<String, dynamic> _$SearchSuggestionsModelToJson(
@@ -320,12 +323,13 @@ class _SearchApiService implements SearchApiService {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<RecentSearchModel> _value;
     try {
-      _value = _result.data!
-          .map(
-            (dynamic i) =>
-                RecentSearchModel.fromJson(i as Map<String, dynamic>),
-          )
-          .toList();
+      _value =
+          _result.data!
+              .map(
+                (dynamic i) =>
+                    RecentSearchModel.fromJson(i as Map<String, dynamic>),
+              )
+              .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

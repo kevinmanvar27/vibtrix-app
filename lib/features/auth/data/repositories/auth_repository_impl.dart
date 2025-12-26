@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import '../../../../core/utils/either.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/network/error_handler.dart';
@@ -26,13 +27,19 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<Result<AuthResponse>> login(LoginRequest request) async {
+    debugPrint('[AuthRepo] login called with username: ${request.username}');
     try {
+      debugPrint('[AuthRepo] Calling API...');
       final response = await _apiService.login(request);
+      debugPrint('[AuthRepo] API response received, user: ${response.user.username}');
       await _saveTokens(response);
+      debugPrint('[AuthRepo] Tokens saved successfully');
       return Right(response);
     } on DioException catch (e) {
+      debugPrint('[AuthRepo] DioException: ${e.message}, response: ${e.response?.data}');
       return Left(NetworkErrorHandler.handleDioError(e));
     } catch (e) {
+      debugPrint('[AuthRepo] Exception: $e');
       return Left(NetworkErrorHandler.handleException(e));
     }
   }

@@ -6,24 +6,33 @@ part of 'settings_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-AppSettingsModel _$AppSettingsModelFromJson(
-  Map<String, dynamic> json,
-) => AppSettingsModel(
-  notifications: json['notifications'] == null
-      ? const NotificationSettingsModel()
-      : NotificationSettingsModel.fromJson(
-          json['notifications'] as Map<String, dynamic>,
-        ),
-  privacy: json['privacy'] == null
-      ? const PrivacySettingsModel()
-      : PrivacySettingsModel.fromJson(json['privacy'] as Map<String, dynamic>),
-  content: json['content'] == null
-      ? const ContentSettingsModel()
-      : ContentSettingsModel.fromJson(json['content'] as Map<String, dynamic>),
-  display: json['display'] == null
-      ? const DisplaySettingsModel()
-      : DisplaySettingsModel.fromJson(json['display'] as Map<String, dynamic>),
-);
+AppSettingsModel _$AppSettingsModelFromJson(Map<String, dynamic> json) =>
+    AppSettingsModel(
+      notifications:
+          json['notifications'] == null
+              ? const NotificationSettingsModel()
+              : NotificationSettingsModel.fromJson(
+                json['notifications'] as Map<String, dynamic>,
+              ),
+      privacy:
+          json['privacy'] == null
+              ? const PrivacySettingsModel()
+              : PrivacySettingsModel.fromJson(
+                json['privacy'] as Map<String, dynamic>,
+              ),
+      content:
+          json['content'] == null
+              ? const ContentSettingsModel()
+              : ContentSettingsModel.fromJson(
+                json['content'] as Map<String, dynamic>,
+              ),
+      display:
+          json['display'] == null
+              ? const DisplaySettingsModel()
+              : DisplaySettingsModel.fromJson(
+                json['display'] as Map<String, dynamic>,
+              ),
+    );
 
 Map<String, dynamic> _$AppSettingsModelToJson(AppSettingsModel instance) =>
     <String, dynamic>{
@@ -203,9 +212,10 @@ AccountSettingsModel _$AccountSettingsModelFromJson(
   username: json['username'] as String,
   emailVerified: json['emailVerified'] as bool? ?? false,
   phoneVerified: json['phoneVerified'] as bool? ?? false,
-  dateOfBirth: json['dateOfBirth'] == null
-      ? null
-      : DateTime.parse(json['dateOfBirth'] as String),
+  dateOfBirth:
+      json['dateOfBirth'] == null
+          ? null
+          : DateTime.parse(json['dateOfBirth'] as String),
   gender: json['gender'] as String?,
   country: json['country'] as String?,
   timezone: json['timezone'] as String?,
@@ -230,9 +240,10 @@ SecuritySettingsModel _$SecuritySettingsModelFromJson(
 ) => SecuritySettingsModel(
   twoFactorEnabled: json['twoFactorEnabled'] as bool? ?? false,
   twoFactorMethod: json['twoFactorMethod'] as String?,
-  lastPasswordChange: json['lastPasswordChange'] == null
-      ? null
-      : DateTime.parse(json['lastPasswordChange'] as String),
+  lastPasswordChange:
+      json['lastPasswordChange'] == null
+          ? null
+          : DateTime.parse(json['lastPasswordChange'] as String),
   loginAlerts: json['loginAlerts'] as bool? ?? true,
   trustedDevices:
       (json['trustedDevices'] as List<dynamic>?)
@@ -289,9 +300,10 @@ UpdateAccountSettingsRequest _$UpdateAccountSettingsRequestFromJson(
   Map<String, dynamic> json,
 ) => UpdateAccountSettingsRequest(
   phone: json['phone'] as String?,
-  dateOfBirth: json['dateOfBirth'] == null
-      ? null
-      : DateTime.parse(json['dateOfBirth'] as String),
+  dateOfBirth:
+      json['dateOfBirth'] == null
+          ? null
+          : DateTime.parse(json['dateOfBirth'] as String),
   gender: json['gender'] as String?,
   country: json['country'] as String?,
   timezone: json['timezone'] as String?,
@@ -324,12 +336,14 @@ Map<String, dynamic> _$UpdateSecuritySettingsRequestToJson(
 UpdateContentPreferencesRequest _$UpdateContentPreferencesRequestFromJson(
   Map<String, dynamic> json,
 ) => UpdateContentPreferencesRequest(
-  preferredCategories: (json['preferredCategories'] as List<dynamic>?)
-      ?.map((e) => e as String)
-      .toList(),
-  blockedCategories: (json['blockedCategories'] as List<dynamic>?)
-      ?.map((e) => e as String)
-      .toList(),
+  preferredCategories:
+      (json['preferredCategories'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+  blockedCategories:
+      (json['blockedCategories'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
   showMatureContent: json['showMatureContent'] as bool?,
   autoplayVideos: json['autoplayVideos'] as bool?,
   videoQuality: json['videoQuality'] as String?,
@@ -425,9 +439,10 @@ TwoFactorSetupModel _$TwoFactorSetupModelFromJson(Map<String, dynamic> json) =>
     TwoFactorSetupModel(
       secret: json['secret'] as String,
       qrCodeUrl: json['qrCodeUrl'] as String,
-      backupCodes: (json['backupCodes'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
+      backupCodes:
+          (json['backupCodes'] as List<dynamic>)
+              .map((e) => e as String)
+              .toList(),
     );
 
 Map<String, dynamic> _$TwoFactorSetupModelToJson(

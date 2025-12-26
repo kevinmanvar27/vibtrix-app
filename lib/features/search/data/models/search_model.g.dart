@@ -101,9 +101,10 @@ TrendingHashtagsModel _$TrendingHashtagsModelFromJson(
           ?.map((e) => HashtagModel.fromJson(e as Map<String, dynamic>))
           .toList() ??
       const [],
-  lastUpdated: json['lastUpdated'] == null
-      ? null
-      : DateTime.parse(json['lastUpdated'] as String),
+  lastUpdated:
+      json['lastUpdated'] == null
+          ? null
+          : DateTime.parse(json['lastUpdated'] as String),
 );
 
 Map<String, dynamic> _$TrendingHashtagsModelToJson(
@@ -120,9 +121,10 @@ TrendingSearchModel _$TrendingSearchModelFromJson(Map<String, dynamic> json) =>
       searchCount: (json['searchCount'] as num?)?.toInt() ?? 0,
       rank: (json['rank'] as num?)?.toInt() ?? 0,
       type: $enumDecodeNullable(_$SearchTypeEnumMap, json['type']),
-      lastSearched: json['lastSearched'] == null
-          ? null
-          : DateTime.parse(json['lastSearched'] as String),
+      lastSearched:
+          json['lastSearched'] == null
+              ? null
+              : DateTime.parse(json['lastSearched'] as String),
     );
 
 Map<String, dynamic> _$TrendingSearchModelToJson(

@@ -12,9 +12,10 @@ CreateReportRequest _$CreateReportRequestFromJson(Map<String, dynamic> json) =>
       targetId: json['targetId'] as String,
       reason: json['reason'] as String,
       description: json['description'] as String?,
-      evidenceUrls: (json['evidenceUrls'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
+      evidenceUrls:
+          (json['evidenceUrls'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList(),
     );
 
 Map<String, dynamic> _$CreateReportRequestToJson(
@@ -33,9 +34,10 @@ ReportReasonModel _$ReportReasonModelFromJson(Map<String, dynamic> json) =>
       code: json['code'] as String,
       label: json['label'] as String,
       description: json['description'] as String?,
-      applicableTypes: (json['applicableTypes'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
+      applicableTypes:
+          (json['applicableTypes'] as List<dynamic>)
+              .map((e) => e as String)
+              .toList(),
       order: (json['order'] as num).toInt(),
     );
 
@@ -199,12 +201,13 @@ class _ReportApiService implements ReportApiService {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<ReportReasonModel> _value;
     try {
-      _value = _result.data!
-          .map(
-            (dynamic i) =>
-                ReportReasonModel.fromJson(i as Map<String, dynamic>),
-          )
-          .toList();
+      _value =
+          _result.data!
+              .map(
+                (dynamic i) =>
+                    ReportReasonModel.fromJson(i as Map<String, dynamic>),
+              )
+              .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

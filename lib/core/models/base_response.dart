@@ -46,6 +46,7 @@ class ApiError {
 }
 
 /// Paginated response for cursor-based pagination
+/// Handles both standard format (items) and API format (posts)
 @JsonSerializable(genericArgumentFactories: true)
 class PaginatedResponse<T> {
   final List<T> items;
@@ -63,11 +64,44 @@ class PaginatedResponse<T> {
   /// Alias for [items] for backward compatibility
   List<T> get data => items;
 
+  /// Custom fromJson that handles both 'items' and 'posts' keys
+  /// API returns: { posts: [...], nextCursor: string | null }
+  /// App expects: { items: [...], nextCursor: string, hasMore: boolean }
   factory PaginatedResponse.fromJson(
     Map<String, dynamic> json,
     T Function(Object? json) fromJsonT,
-  ) =>
-      _$PaginatedResponseFromJson(json, fromJsonT);
+  ) {
+    // Handle both 'items' and 'posts' keys
+    List<dynamic>? rawItems;
+    if (json['items'] != null) {
+      rawItems = json['items'] as List<dynamic>;
+    } else if (json['posts'] != null) {
+      rawItems = json['posts'] as List<dynamic>;
+    } else if (json['data'] != null && json['data'] is List) {
+      rawItems = json['data'] as List<dynamic>;
+    }
+    
+    final items = rawItems?.map(fromJsonT).toList() ?? <T>[];
+    
+    // Handle nextCursor
+    final nextCursor = json['nextCursor'] as String?;
+    
+    // Handle hasMore: if not provided, derive from nextCursor
+    bool hasMore;
+    if (json['hasMore'] != null) {
+      hasMore = json['hasMore'] as bool;
+    } else {
+      // If nextCursor exists, there are more items
+      hasMore = nextCursor != null;
+    }
+    
+    return PaginatedResponse<T>(
+      items: items,
+      nextCursor: nextCursor,
+      hasMore: hasMore,
+      totalCount: (json['totalCount'] as num?)?.toInt(),
+    );
+  }
 
   Map<String, dynamic> toJson(Object? Function(T value) toJsonT) =>
       _$PaginatedResponseToJson(this, toJsonT);

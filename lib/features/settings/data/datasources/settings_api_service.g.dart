@@ -111,9 +111,10 @@ DataExportResponse _$DataExportResponseFromJson(Map<String, dynamic> json) =>
       exportId: json['exportId'] as String,
       status: json['status'] as String,
       downloadUrl: json['downloadUrl'] as String?,
-      expiresAt: json['expiresAt'] == null
-          ? null
-          : DateTime.parse(json['expiresAt'] as String),
+      expiresAt:
+          json['expiresAt'] == null
+              ? null
+              : DateTime.parse(json['expiresAt'] as String),
       requestedAt: DateTime.parse(json['requestedAt'] as String),
     );
 
@@ -485,11 +486,13 @@ class _SettingsApiService implements SettingsApiService {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<FeedStickerModel> _value;
     try {
-      _value = _result.data!
-          .map(
-            (dynamic i) => FeedStickerModel.fromJson(i as Map<String, dynamic>),
-          )
-          .toList();
+      _value =
+          _result.data!
+              .map(
+                (dynamic i) =>
+                    FeedStickerModel.fromJson(i as Map<String, dynamic>),
+              )
+              .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -516,12 +519,13 @@ class _SettingsApiService implements SettingsApiService {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<StickerCategoryModel> _value;
     try {
-      _value = _result.data!
-          .map(
-            (dynamic i) =>
-                StickerCategoryModel.fromJson(i as Map<String, dynamic>),
-          )
-          .toList();
+      _value =
+          _result.data!
+              .map(
+                (dynamic i) =>
+                    StickerCategoryModel.fromJson(i as Map<String, dynamic>),
+              )
+              .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -642,9 +646,12 @@ class _SettingsApiService implements SettingsApiService {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<SessionModel> _value;
     try {
-      _value = _result.data!
-          .map((dynamic i) => SessionModel.fromJson(i as Map<String, dynamic>))
-          .toList();
+      _value =
+          _result.data!
+              .map(
+                (dynamic i) => SessionModel.fromJson(i as Map<String, dynamic>),
+              )
+              .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -709,12 +716,13 @@ class _SettingsApiService implements SettingsApiService {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<LinkedAccountModel> _value;
     try {
-      _value = _result.data!
-          .map(
-            (dynamic i) =>
-                LinkedAccountModel.fromJson(i as Map<String, dynamic>),
-          )
-          .toList();
+      _value =
+          _result.data!
+              .map(
+                (dynamic i) =>
+                    LinkedAccountModel.fromJson(i as Map<String, dynamic>),
+              )
+              .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -935,9 +943,13 @@ class _SettingsApiService implements SettingsApiService {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<LanguageModel> _value;
     try {
-      _value = _result.data!
-          .map((dynamic i) => LanguageModel.fromJson(i as Map<String, dynamic>))
-          .toList();
+      _value =
+          _result.data!
+              .map(
+                (dynamic i) =>
+                    LanguageModel.fromJson(i as Map<String, dynamic>),
+              )
+              .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -1224,9 +1236,10 @@ class _SettingsApiService implements SettingsApiService {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<FaqModel> _value;
     try {
-      _value = _result.data!
-          .map((dynamic i) => FaqModel.fromJson(i as Map<String, dynamic>))
-          .toList();
+      _value =
+          _result.data!
+              .map((dynamic i) => FaqModel.fromJson(i as Map<String, dynamic>))
+              .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -1253,11 +1266,13 @@ class _SettingsApiService implements SettingsApiService {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<FaqCategoryModel> _value;
     try {
-      _value = _result.data!
-          .map(
-            (dynamic i) => FaqCategoryModel.fromJson(i as Map<String, dynamic>),
-          )
-          .toList();
+      _value =
+          _result.data!
+              .map(
+                (dynamic i) =>
+                    FaqCategoryModel.fromJson(i as Map<String, dynamic>),
+              )
+              .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

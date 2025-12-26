@@ -15,9 +15,10 @@ WalletModel _$WalletModelFromJson(Map<String, dynamic> json) => WalletModel(
   totalWithdrawals: (json['totalWithdrawals'] as num?)?.toInt() ?? 0,
   pendingWithdrawal: (json['pendingWithdrawal'] as num?)?.toInt() ?? 0,
   createdAt: DateTime.parse(json['createdAt'] as String),
-  updatedAt: json['updatedAt'] == null
-      ? null
-      : DateTime.parse(json['updatedAt'] as String),
+  updatedAt:
+      json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
 );
 
 Map<String, dynamic> _$WalletModelToJson(WalletModel instance) =>
@@ -47,9 +48,10 @@ TransactionModel _$TransactionModelFromJson(Map<String, dynamic> json) =>
       paymentId: json['paymentId'] as String?,
       metadata: json['metadata'] as Map<String, dynamic>?,
       createdAt: DateTime.parse(json['createdAt'] as String),
-      completedAt: json['completedAt'] == null
-          ? null
-          : DateTime.parse(json['completedAt'] as String),
+      completedAt:
+          json['completedAt'] == null
+              ? null
+              : DateTime.parse(json['completedAt'] as String),
     );
 
 Map<String, dynamic> _$TransactionModelToJson(TransactionModel instance) =>
@@ -225,12 +227,14 @@ EarningsModel _$EarningsModelFromJson(Map<String, dynamic> json) =>
       referralEarnings: (json['referralEarnings'] as num?)?.toInt() ?? 0,
       bonusEarnings: (json['bonusEarnings'] as num?)?.toInt() ?? 0,
       currency: json['currency'] as String? ?? 'INR',
-      periodStart: json['periodStart'] == null
-          ? null
-          : DateTime.parse(json['periodStart'] as String),
-      periodEnd: json['periodEnd'] == null
-          ? null
-          : DateTime.parse(json['periodEnd'] as String),
+      periodStart:
+          json['periodStart'] == null
+              ? null
+              : DateTime.parse(json['periodStart'] as String),
+      periodEnd:
+          json['periodEnd'] == null
+              ? null
+              : DateTime.parse(json['periodEnd'] as String),
     );
 
 Map<String, dynamic> _$EarningsModelToJson(EarningsModel instance) =>
@@ -283,9 +287,10 @@ RewardModel _$RewardModelFromJson(Map<String, dynamic> json) => RewardModel(
   description: json['description'] as String?,
   amount: (json['amount'] as num).toInt(),
   type: json['type'] as String,
-  expiresAt: json['expiresAt'] == null
-      ? null
-      : DateTime.parse(json['expiresAt'] as String),
+  expiresAt:
+      json['expiresAt'] == null
+          ? null
+          : DateTime.parse(json['expiresAt'] as String),
   isClaimed: json['isClaimed'] as bool? ?? false,
 );
 
@@ -326,15 +331,20 @@ KycStatusModel _$KycStatusModelFromJson(Map<String, dynamic> json) =>
           $enumDecodeNullable(_$KycStatusEnumMap, json['status']) ??
           KycStatus.notSubmitted,
       rejectionReason: json['rejectionReason'] as String?,
-      submittedAt: json['submittedAt'] == null
-          ? null
-          : DateTime.parse(json['submittedAt'] as String),
-      verifiedAt: json['verifiedAt'] == null
-          ? null
-          : DateTime.parse(json['verifiedAt'] as String),
-      documents: json['documents'] == null
-          ? null
-          : KycDocuments.fromJson(json['documents'] as Map<String, dynamic>),
+      submittedAt:
+          json['submittedAt'] == null
+              ? null
+              : DateTime.parse(json['submittedAt'] as String),
+      verifiedAt:
+          json['verifiedAt'] == null
+              ? null
+              : DateTime.parse(json['verifiedAt'] as String),
+      documents:
+          json['documents'] == null
+              ? null
+              : KycDocuments.fromJson(
+                json['documents'] as Map<String, dynamic>,
+              ),
     );
 
 Map<String, dynamic> _$KycStatusModelToJson(KycStatusModel instance) =>

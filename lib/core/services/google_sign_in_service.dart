@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -9,33 +10,68 @@ class GoogleSignInService {
   late final GoogleSignIn _googleSignIn;
 
   GoogleSignInService() {
-    _googleSignIn = GoogleSignIn(
-      // Always provide clientId for all platforms (required for web and iOS)
-      clientId: AuthConstants.googleWebClientId,
-      serverClientId: AuthConstants.googleWebClientId,
-      scopes: AuthConstants.googleScopes,
-    );
+    // Configure Google Sign-In based on platform
+    // Android: Uses OAuth client configured in Google Cloud Console (based on SHA-1)
+    //          Don't pass clientId for Android - it uses the one from google-services.json
+    //          or the one configured in Google Cloud Console
+    // iOS/Web: Need to pass the clientId explicitly
+    
+    if (kIsWeb) {
+      // Web platform
+      _googleSignIn = GoogleSignIn(
+        clientId: AuthConstants.googleWebClientId,
+        scopes: AuthConstants.googleScopes,
+      );
+    } else if (Platform.isIOS) {
+      // iOS platform
+      _googleSignIn = GoogleSignIn(
+        clientId: AuthConstants.googleIosClientId,
+        serverClientId: AuthConstants.googleWebClientId,
+        scopes: AuthConstants.googleScopes,
+      );
+    } else {
+      // Android platform
+      // For Android, we use serverClientId which is the web client ID
+      // The Android client is configured in Google Cloud Console with SHA-1
+      // and is automatically used based on the app's package name and signing key
+      _googleSignIn = GoogleSignIn(
+        serverClientId: AuthConstants.googleWebClientId,
+        scopes: AuthConstants.googleScopes,
+      );
+    }
   }
 
   /// Sign in with Google
   /// Returns the ID token for backend verification
   Future<GoogleSignInResult> signIn() async {
     try {
+      debugPrint('[GoogleSignIn] Starting sign-in process...');
+      
       // Sign out first to ensure fresh login
       await _googleSignIn.signOut();
+      debugPrint('[GoogleSignIn] Previous session cleared');
       
       final GoogleSignInAccount? account = await _googleSignIn.signIn();
       
       if (account == null) {
+        debugPrint('[GoogleSignIn] User cancelled sign-in');
         return GoogleSignInResult.cancelled();
       }
 
+      debugPrint('[GoogleSignIn] Account selected: ${account.email}');
+      
       final GoogleSignInAuthentication auth = await account.authentication;
+      debugPrint('[GoogleSignIn] Got authentication, idToken: ${auth.idToken != null ? "present" : "null"}');
       
       if (auth.idToken == null) {
-        return GoogleSignInResult.error('Failed to get ID token');
+        debugPrint('[GoogleSignIn] ERROR: ID token is null');
+        // This can happen if serverClientId is not properly configured
+        return GoogleSignInResult.error(
+          'Failed to get ID token. Please check Google Sign-In configuration.'
+        );
       }
 
+      debugPrint('[GoogleSignIn] Success! Email: ${account.email}');
       return GoogleSignInResult.success(
         idToken: auth.idToken!,
         accessToken: auth.accessToken,
@@ -43,9 +79,24 @@ class GoogleSignInService {
         displayName: account.displayName,
         photoUrl: account.photoUrl,
       );
-    } catch (e) {
-      debugPrint('Google Sign-In error: $e');
-      return GoogleSignInResult.error(e.toString());
+    } catch (e, stackTrace) {
+      debugPrint('[GoogleSignIn] ERROR: $e');
+      debugPrint('[GoogleSignIn] Stack trace: $stackTrace');
+      
+      String errorMessage = e.toString();
+      
+      // Provide more helpful error messages
+      if (errorMessage.contains('ApiException: 10')) {
+        errorMessage = 'Google Sign-In configuration error. Please check SHA-1 fingerprint in Google Cloud Console.';
+      } else if (errorMessage.contains('ApiException: 12500')) {
+        errorMessage = 'Google Sign-In failed. Please update Google Play Services.';
+      } else if (errorMessage.contains('ApiException: 7')) {
+        errorMessage = 'Network error. Please check your internet connection.';
+      } else if (errorMessage.contains('DEVELOPER_ERROR')) {
+        errorMessage = 'Google Sign-In configuration error. SHA-1 fingerprint may not be registered.';
+      }
+      
+      return GoogleSignInResult.error(errorMessage);
     }
   }
 

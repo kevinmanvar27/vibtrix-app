@@ -5,7 +5,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.8.0
+  sdk: ^3.7.0
 
 dependencies:
   flutter:
@@ -28,7 +28,7 @@ dependencies:
   
   # Network & API
   dio: ^5.5.0+1
-  retrofit: 4.8.0
+  retrofit: ^4.4.1
   json_annotation: ^4.9.0
   
   # Local Storage

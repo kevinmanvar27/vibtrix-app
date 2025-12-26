@@ -14,17 +14,19 @@ FeedbackModel _$FeedbackModelFromJson(Map<String, dynamic> json) =>
       subject: json['subject'] as String,
       message: json['message'] as String,
       rating: (json['rating'] as num?)?.toInt(),
-      attachments: (json['attachments'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
+      attachments:
+          (json['attachments'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList(),
       status:
           $enumDecodeNullable(_$FeedbackStatusEnumMap, json['status']) ??
           FeedbackStatus.pending,
       response: json['response'] as String?,
       createdAt: DateTime.parse(json['createdAt'] as String),
-      respondedAt: json['respondedAt'] == null
-          ? null
-          : DateTime.parse(json['respondedAt'] as String),
+      respondedAt:
+          json['respondedAt'] == null
+              ? null
+              : DateTime.parse(json['respondedAt'] as String),
     );
 
 Map<String, dynamic> _$FeedbackModelToJson(FeedbackModel instance) =>
@@ -84,9 +86,8 @@ CreateFeedbackRequest _$CreateFeedbackRequestFromJson(
   subject: json['subject'] as String,
   message: json['message'] as String,
   rating: (json['rating'] as num?)?.toInt(),
-  attachments: (json['attachments'] as List<dynamic>?)
-      ?.map((e) => e as String)
-      .toList(),
+  attachments:
+      (json['attachments'] as List<dynamic>?)?.map((e) => e as String).toList(),
 );
 
 Map<String, dynamic> _$CreateFeedbackRequestToJson(

@@ -17,9 +17,10 @@ ReportModel _$ReportModelFromJson(Map<String, dynamic> json) => ReportModel(
       $enumDecodeNullable(_$ReportStatusEnumMap, json['status']) ??
       ReportStatus.pending,
   createdAt: DateTime.parse(json['createdAt'] as String),
-  resolvedAt: json['resolvedAt'] == null
-      ? null
-      : DateTime.parse(json['resolvedAt'] as String),
+  resolvedAt:
+      json['resolvedAt'] == null
+          ? null
+          : DateTime.parse(json['resolvedAt'] as String),
 );
 
 Map<String, dynamic> _$ReportModelToJson(ReportModel instance) =>

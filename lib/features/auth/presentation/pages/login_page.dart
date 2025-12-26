@@ -18,7 +18,7 @@ class LoginPage extends ConsumerStatefulWidget {
 
 class _LoginPageState extends ConsumerState<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
+  final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _obscurePassword = true;
   bool _isLoading = false;
@@ -26,7 +26,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   @override
   void dispose() {
-    _emailController.dispose();
+    _usernameController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -35,24 +35,33 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     if (!_formKey.currentState!.validate()) return;
 
     setState(() => _isLoading = true);
+    debugPrint('[LoginPage] _handleLogin() called');
+    debugPrint('[LoginPage] Username: ${_usernameController.text.trim()}');
 
     try {
+      debugPrint('[LoginPage] Calling authProvider.login()...');
       final success = await ref.read(authProvider.notifier).login(
-        email: _emailController.text.trim(),
+        username: _usernameController.text.trim(),
         password: _passwordController.text,
       );
       
+      debugPrint('[LoginPage] authProvider.login() returned: $success');
+      
       if (mounted) {
         if (success) {
+          debugPrint('[LoginPage] Login successful, navigating to feed...');
           context.go(RouteNames.feed);
         } else {
           final errorMessage = ref.read(authProvider).errorMessage;
+          debugPrint('[LoginPage] Login failed, error: $errorMessage');
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(errorMessage ?? 'Login failed. Please try again.')),
           );
         }
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
+      debugPrint('[LoginPage] Exception during login: $e');
+      debugPrint('[LoginPage] Stack trace: $stackTrace');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Login failed: $e')),
@@ -174,16 +183,16 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 ),
                 const SizedBox(height: 48),
 
-                // Email field
+                // Username field
                 TextFormField(
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
+                  controller: _usernameController,
+                  keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
-                  validator: Validators.email,
+                  validator: Validators.required,
                   decoration: const InputDecoration(
-                    labelText: 'Email',
-                    hintText: 'Enter your email',
-                    prefixIcon: Icon(Icons.email_outlined),
+                    labelText: 'Username',
+                    hintText: 'Enter your username',
+                    prefixIcon: Icon(Icons.person_outline),
                   ),
                 ),
                 const SizedBox(height: 16),

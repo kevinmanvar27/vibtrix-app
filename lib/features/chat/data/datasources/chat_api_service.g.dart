@@ -815,12 +815,13 @@ class _ChatApiService implements ChatApiService {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<ChatParticipantModel> _value;
     try {
-      _value = _result.data!
-          .map(
-            (dynamic i) =>
-                ChatParticipantModel.fromJson(i as Map<String, dynamic>),
-          )
-          .toList();
+      _value =
+          _result.data!
+              .map(
+                (dynamic i) =>
+                    ChatParticipantModel.fromJson(i as Map<String, dynamic>),
+              )
+              .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

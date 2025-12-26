@@ -6,47 +6,52 @@ part of 'explore_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ExploreFeedModel _$ExploreFeedModelFromJson(Map<String, dynamic> json) =>
-    ExploreFeedModel(
-      trendingPosts: (json['trendingPosts'] as List<dynamic>?)
+ExploreFeedModel _$ExploreFeedModelFromJson(
+  Map<String, dynamic> json,
+) => ExploreFeedModel(
+  trendingPosts:
+      (json['trendingPosts'] as List<dynamic>?)
           ?.map((e) => PostModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      trendingHashtags: (json['trendingHashtags'] as List<dynamic>?)
+  trendingHashtags:
+      (json['trendingHashtags'] as List<dynamic>?)
           ?.map((e) => HashtagModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      suggestedUsers: (json['suggestedUsers'] as List<dynamic>?)
+  suggestedUsers:
+      (json['suggestedUsers'] as List<dynamic>?)
           ?.map((e) => SimpleUserModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      activeCompetitions: (json['activeCompetitions'] as List<dynamic>?)
+  activeCompetitions:
+      (json['activeCompetitions'] as List<dynamic>?)
           ?.map((e) => CompetitionModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      categories: (json['categories'] as List<dynamic>?)
+  categories:
+      (json['categories'] as List<dynamic>?)
           ?.map((e) => ExploreCategoryModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      featuredContent: (json['featuredContent'] as List<dynamic>?)
+  featuredContent:
+      (json['featuredContent'] as List<dynamic>?)
           ?.map((e) => FeaturedContentModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      featuredCreators: (json['featuredCreators'] as List<dynamic>?)
+  featuredCreators:
+      (json['featuredCreators'] as List<dynamic>?)
           ?.map((e) => SimpleUserModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-    );
+);
 
 Map<String, dynamic> _$ExploreFeedModelToJson(
   ExploreFeedModel instance,
 ) => <String, dynamic>{
   'trendingPosts': instance.trendingPosts?.map((e) => e.toJson()).toList(),
-  'trendingHashtags': instance.trendingHashtags
-      ?.map((e) => e.toJson())
-      .toList(),
+  'trendingHashtags':
+      instance.trendingHashtags?.map((e) => e.toJson()).toList(),
   'suggestedUsers': instance.suggestedUsers?.map((e) => e.toJson()).toList(),
-  'activeCompetitions': instance.activeCompetitions
-      ?.map((e) => e.toJson())
-      .toList(),
+  'activeCompetitions':
+      instance.activeCompetitions?.map((e) => e.toJson()).toList(),
   'categories': instance.categories?.map((e) => e.toJson()).toList(),
   'featuredContent': instance.featuredContent?.map((e) => e.toJson()).toList(),
-  'featuredCreators': instance.featuredCreators
-      ?.map((e) => e.toJson())
-      .toList(),
+  'featuredCreators':
+      instance.featuredCreators?.map((e) => e.toJson()).toList(),
 };
 
 ExploreCategoryModel _$ExploreCategoryModelFromJson(
@@ -87,12 +92,14 @@ FeaturedContentModel _$FeaturedContentModelFromJson(
   targetId: json['target_id'] as String?,
   targetUrl: json['target_url'] as String?,
   priority: (json['priority'] as num?)?.toInt(),
-  startDate: json['start_date'] == null
-      ? null
-      : DateTime.parse(json['start_date'] as String),
-  endDate: json['end_date'] == null
-      ? null
-      : DateTime.parse(json['end_date'] as String),
+  startDate:
+      json['start_date'] == null
+          ? null
+          : DateTime.parse(json['start_date'] as String),
+  endDate:
+      json['end_date'] == null
+          ? null
+          : DateTime.parse(json['end_date'] as String),
   isActive: json['is_active'] as bool?,
 );
 
@@ -132,15 +139,18 @@ HashtagDetailModel _$HashtagDetailModelFromJson(Map<String, dynamic> json) =>
       isFollowing: json['is_following'] as bool?,
       description: json['description'] as String?,
       coverImage: json['cover_image'] as String?,
-      topPosts: (json['top_posts'] as List<dynamic>?)
-          ?.map((e) => PostModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      relatedHashtags: (json['related_hashtags'] as List<dynamic>?)
-          ?.map((e) => HashtagModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      createdAt: json['created_at'] == null
-          ? null
-          : DateTime.parse(json['created_at'] as String),
+      topPosts:
+          (json['top_posts'] as List<dynamic>?)
+              ?.map((e) => PostModel.fromJson(e as Map<String, dynamic>))
+              .toList(),
+      relatedHashtags:
+          (json['related_hashtags'] as List<dynamic>?)
+              ?.map((e) => HashtagModel.fromJson(e as Map<String, dynamic>))
+              .toList(),
+      createdAt:
+          json['created_at'] == null
+              ? null
+              : DateTime.parse(json['created_at'] as String),
     );
 
 Map<String, dynamic> _$HashtagDetailModelToJson(

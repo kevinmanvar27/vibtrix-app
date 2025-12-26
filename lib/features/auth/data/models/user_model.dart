@@ -215,8 +215,20 @@ class SimpleUserModel {
     this.isVerified = false,
   });
 
-  factory SimpleUserModel.fromJson(Map<String, dynamic> json) =>
-      _$SimpleUserModelFromJson(json);
+  /// Custom fromJson that handles API field name differences
+  /// API returns: displayName, avatarUrl
+  /// App expects: name, profilePicture
+  factory SimpleUserModel.fromJson(Map<String, dynamic> json) {
+    return SimpleUserModel(
+      id: json['id'] as String,
+      username: json['username'] as String,
+      // Handle both 'name' and 'displayName' from API
+      name: json['name'] as String? ?? json['displayName'] as String?,
+      // Handle both 'profilePicture' and 'avatarUrl' from API
+      profilePicture: json['profilePicture'] as String? ?? json['avatarUrl'] as String?,
+      isVerified: json['isVerified'] as bool? ?? false,
+    );
+  }
 
   Map<String, dynamic> toJson() => _$SimpleUserModelToJson(this);
 }

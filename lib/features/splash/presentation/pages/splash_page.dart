@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -58,25 +59,46 @@ class _SplashPageState extends ConsumerState<SplashPage>
   }
 
   Future<void> _navigateToNextScreen() async {
+    debugPrint('[Splash] Starting navigation check...');
+    
     // Wait for animation and minimum splash duration
     await Future.delayed(const Duration(milliseconds: 2000));
     
-    if (!mounted) return;
+    if (!mounted) {
+      debugPrint('[Splash] Widget not mounted, returning');
+      return;
+    }
     
     // Check if onboarding is complete
     final onboardingComplete = LocalStorage.isOnboardingComplete();
+    debugPrint('[Splash] Onboarding complete: $onboardingComplete');
     
     if (!onboardingComplete) {
+      debugPrint('[Splash] Navigating to onboarding...');
       context.go(RouteNames.onboarding);
       return;
     }
     
+    // Wait for auth to be initialized (with timeout)
+    debugPrint('[Splash] Waiting for auth initialization...');
+    int attempts = 0;
+    const maxAttempts = 30; // 3 seconds max wait
+    while (!ref.read(authStateProvider).isInitialized && attempts < maxAttempts) {
+      await Future.delayed(const Duration(milliseconds: 100));
+      attempts++;
+      if (!mounted) return;
+    }
+    debugPrint('[Splash] Auth initialized after $attempts attempts');
+    
     // Check auth state
     final authState = ref.read(authStateProvider);
+    debugPrint('[Splash] Auth state - isAuthenticated: ${authState.isAuthenticated}, isInitialized: ${authState.isInitialized}');
     
     if (authState.isAuthenticated) {
+      debugPrint('[Splash] Navigating to home...');
       context.go(RouteNames.home);
     } else {
+      debugPrint('[Splash] Navigating to login...');
       context.go(RouteNames.login);
     }
   }

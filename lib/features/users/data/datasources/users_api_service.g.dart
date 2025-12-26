@@ -90,11 +90,13 @@ class _UsersApiService implements UsersApiService {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<SimpleUserModel> _value;
     try {
-      _value = _result.data!
-          .map(
-            (dynamic i) => SimpleUserModel.fromJson(i as Map<String, dynamic>),
-          )
-          .toList();
+      _value =
+          _result.data!
+              .map(
+                (dynamic i) =>
+                    SimpleUserModel.fromJson(i as Map<String, dynamic>),
+              )
+              .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

@@ -9,11 +9,15 @@ part of 'post_model.dart';
 PostModel _$PostModelFromJson(Map<String, dynamic> json) => PostModel(
   id: json['id'] as String,
   userId: json['userId'] as String,
-  user: json['user'] == null
-      ? null
-      : SimpleUserModel.fromJson(json['user'] as Map<String, dynamic>),
-  caption: json['caption'] as String?,
-  media: PostMediaModel.fromJson(json['media'] as Map<String, dynamic>),
+  user:
+      json['user'] == null
+          ? null
+          : SimpleUserModel.fromJson(json['user'] as Map<String, dynamic>),
+  caption: json['content'] as String?,
+  media:
+      json['media'] == null
+          ? null
+          : PostMediaModel.fromJson(json['media'] as Map<String, dynamic>),
   likesCount: (json['likesCount'] as num?)?.toInt() ?? 0,
   commentsCount: (json['commentsCount'] as num?)?.toInt() ?? 0,
   sharesCount: (json['sharesCount'] as num?)?.toInt() ?? 0,
@@ -21,31 +25,34 @@ PostModel _$PostModelFromJson(Map<String, dynamic> json) => PostModel(
   isLiked: json['isLiked'] as bool? ?? false,
   isBookmarked: json['isBookmarked'] as bool? ?? false,
   competitionId: json['competitionId'] as String?,
-  competition: json['competition'] == null
-      ? null
-      : CompetitionInfoModel.fromJson(
-          json['competition'] as Map<String, dynamic>,
-        ),
-  hashtags: (json['hashtags'] as List<dynamic>?)
-      ?.map((e) => e as String)
-      .toList(),
-  mentions: (json['mentions'] as List<dynamic>?)
-      ?.map((e) => e as String)
-      .toList(),
-  location: json['location'] == null
-      ? null
-      : PostLocationModel.fromJson(json['location'] as Map<String, dynamic>),
+  competition:
+      json['competition'] == null
+          ? null
+          : CompetitionInfoModel.fromJson(
+            json['competition'] as Map<String, dynamic>,
+          ),
+  hashtags:
+      (json['hashtags'] as List<dynamic>?)?.map((e) => e as String).toList(),
+  mentions:
+      (json['mentions'] as List<dynamic>?)?.map((e) => e as String).toList(),
+  location:
+      json['location'] == null
+          ? null
+          : PostLocationModel.fromJson(
+            json['location'] as Map<String, dynamic>,
+          ),
   createdAt: DateTime.parse(json['createdAt'] as String),
-  updatedAt: json['updatedAt'] == null
-      ? null
-      : DateTime.parse(json['updatedAt'] as String),
+  updatedAt:
+      json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
 );
 
 Map<String, dynamic> _$PostModelToJson(PostModel instance) => <String, dynamic>{
   'id': instance.id,
   'userId': instance.userId,
   'user': instance.user,
-  'caption': instance.caption,
+  'content': instance.caption,
   'media': instance.media,
   'likesCount': instance.likesCount,
   'commentsCount': instance.commentsCount,
@@ -70,9 +77,10 @@ PostMediaModel _$PostMediaModelFromJson(Map<String, dynamic> json) =>
       width: (json['width'] as num?)?.toInt(),
       height: (json['height'] as num?)?.toInt(),
       duration: (json['duration'] as num?)?.toInt(),
-      stickers: (json['stickers'] as List<dynamic>?)
-          ?.map((e) => StickerModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      stickers:
+          (json['stickers'] as List<dynamic>?)
+              ?.map((e) => StickerModel.fromJson(e as Map<String, dynamic>))
+              .toList(),
     );
 
 Map<String, dynamic> _$PostMediaModelToJson(PostMediaModel instance) =>
@@ -143,9 +151,10 @@ CommentModel _$CommentModelFromJson(Map<String, dynamic> json) => CommentModel(
   id: json['id'] as String,
   postId: json['postId'] as String,
   userId: json['userId'] as String,
-  user: json['user'] == null
-      ? null
-      : SimpleUserModel.fromJson(json['user'] as Map<String, dynamic>),
+  user:
+      json['user'] == null
+          ? null
+          : SimpleUserModel.fromJson(json['user'] as Map<String, dynamic>),
   content: json['content'] as String,
   likesCount: (json['likesCount'] as num?)?.toInt() ?? 0,
   isLiked: json['isLiked'] as bool? ?? false,
@@ -175,14 +184,16 @@ CreatePostRequest _$CreatePostRequestFromJson(Map<String, dynamic> json) =>
       thumbnailUrl: json['thumbnailUrl'] as String?,
       caption: json['caption'] as String?,
       competitionId: json['competitionId'] as String?,
-      stickers: (json['stickers'] as List<dynamic>?)
-          ?.map((e) => StickerModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      location: json['location'] == null
-          ? null
-          : PostLocationModel.fromJson(
-              json['location'] as Map<String, dynamic>,
-            ),
+      stickers:
+          (json['stickers'] as List<dynamic>?)
+              ?.map((e) => StickerModel.fromJson(e as Map<String, dynamic>))
+              .toList(),
+      location:
+          json['location'] == null
+              ? null
+              : PostLocationModel.fromJson(
+                json['location'] as Map<String, dynamic>,
+              ),
     );
 
 Map<String, dynamic> _$CreatePostRequestToJson(CreatePostRequest instance) =>
@@ -199,11 +210,12 @@ Map<String, dynamic> _$CreatePostRequestToJson(CreatePostRequest instance) =>
 UpdatePostRequest _$UpdatePostRequestFromJson(Map<String, dynamic> json) =>
     UpdatePostRequest(
       caption: json['caption'] as String?,
-      location: json['location'] == null
-          ? null
-          : PostLocationModel.fromJson(
-              json['location'] as Map<String, dynamic>,
-            ),
+      location:
+          json['location'] == null
+              ? null
+              : PostLocationModel.fromJson(
+                json['location'] as Map<String, dynamic>,
+              ),
     );
 
 Map<String, dynamic> _$UpdatePostRequestToJson(UpdatePostRequest instance) =>

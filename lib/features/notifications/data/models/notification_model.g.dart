@@ -14,19 +14,22 @@ NotificationModel _$NotificationModelFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String,
       body: json['body'] as String?,
       imageUrl: json['imageUrl'] as String?,
-      data: json['data'] == null
-          ? null
-          : NotificationDataModel.fromJson(
-              json['data'] as Map<String, dynamic>,
-            ),
-      actor: json['actor'] == null
-          ? null
-          : SimpleUserModel.fromJson(json['actor'] as Map<String, dynamic>),
+      data:
+          json['data'] == null
+              ? null
+              : NotificationDataModel.fromJson(
+                json['data'] as Map<String, dynamic>,
+              ),
+      actor:
+          json['actor'] == null
+              ? null
+              : SimpleUserModel.fromJson(json['actor'] as Map<String, dynamic>),
       isRead: json['isRead'] as bool? ?? false,
       createdAt: DateTime.parse(json['createdAt'] as String),
-      readAt: json['readAt'] == null
-          ? null
-          : DateTime.parse(json['readAt'] as String),
+      readAt:
+          json['readAt'] == null
+              ? null
+              : DateTime.parse(json['readAt'] as String),
     );
 
 Map<String, dynamic> _$NotificationModelToJson(NotificationModel instance) =>
@@ -116,9 +119,10 @@ DeviceTokenModel _$DeviceTokenModelFromJson(Map<String, dynamic> json) =>
       deviceName: json['deviceName'] as String?,
       isActive: json['isActive'] as bool? ?? true,
       createdAt: DateTime.parse(json['createdAt'] as String),
-      lastUsedAt: json['lastUsedAt'] == null
-          ? null
-          : DateTime.parse(json['lastUsedAt'] as String),
+      lastUsedAt:
+          json['lastUsedAt'] == null
+              ? null
+              : DateTime.parse(json['lastUsedAt'] as String),
     );
 
 Map<String, dynamic> _$DeviceTokenModelToJson(DeviceTokenModel instance) =>
@@ -155,9 +159,10 @@ Map<String, dynamic> _$RegisterDeviceRequestToJson(
 MarkNotificationsReadRequest _$MarkNotificationsReadRequestFromJson(
   Map<String, dynamic> json,
 ) => MarkNotificationsReadRequest(
-  notificationIds: (json['notificationIds'] as List<dynamic>?)
-      ?.map((e) => e as String)
-      .toList(),
+  notificationIds:
+      (json['notificationIds'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
   markAll: json['markAll'] as bool? ?? false,
 );
 

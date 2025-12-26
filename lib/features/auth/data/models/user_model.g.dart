@@ -22,12 +22,14 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
   postsCount: (json['postsCount'] as num?)?.toInt() ?? 0,
   totalLikes: (json['totalLikes'] as num?)?.toInt() ?? 0,
   createdAt: DateTime.parse(json['createdAt'] as String),
-  updatedAt: json['updatedAt'] == null
-      ? null
-      : DateTime.parse(json['updatedAt'] as String),
-  settings: json['settings'] == null
-      ? null
-      : UserSettings.fromJson(json['settings'] as Map<String, dynamic>),
+  updatedAt:
+      json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
+  settings:
+      json['settings'] == null
+          ? null
+          : UserSettings.fromJson(json['settings'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
@@ -86,12 +88,14 @@ UserProfileModel _$UserProfileModelFromJson(Map<String, dynamic> json) =>
       postsCount: (json['postsCount'] as num?)?.toInt() ?? 0,
       totalLikes: (json['totalLikes'] as num?)?.toInt() ?? 0,
       createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: json['updatedAt'] == null
-          ? null
-          : DateTime.parse(json['updatedAt'] as String),
-      settings: json['settings'] == null
-          ? null
-          : UserSettings.fromJson(json['settings'] as Map<String, dynamic>),
+      updatedAt:
+          json['updatedAt'] == null
+              ? null
+              : DateTime.parse(json['updatedAt'] as String),
+      settings:
+          json['settings'] == null
+              ? null
+              : UserSettings.fromJson(json['settings'] as Map<String, dynamic>),
       isFollowing: json['isFollowing'] as bool?,
       isFollowedBy: json['isFollowedBy'] as bool?,
       isBlocked: json['isBlocked'] as bool?,

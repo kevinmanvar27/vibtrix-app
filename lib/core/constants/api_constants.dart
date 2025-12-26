@@ -7,7 +7,7 @@ class ApiConstants {
   // Example: 'http://192.168.1.100:3000'
   // For Android emulator, use: 'http://10.0.2.2:3000'
   // For iOS simulator, use: 'http://localhost:3000'
-  static const String baseUrl = 'http://192.168.1.6:3000';
+  static const String baseUrl = 'http://192.168.1.35:3002';
   
   // API Version
   static const String apiVersion = '/api';
